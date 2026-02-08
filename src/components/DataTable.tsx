@@ -62,11 +62,33 @@ export function DataTable({ historicalData, predictedTemp, unit, convertTemp }: 
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {historicalData.map((data, index) => {
-              const temp = convertTemp(data.minTemp);
-              const prevTemp = index > 0 ? convertTemp(historicalData[index - 1].minTemp) : temp;
-              
-              return (
+          <tr className="bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 transition-colors">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+              {getTomorrowDate()}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-red-600">
+              {convertTemp(predictedTemp).toFixed(1)}°{unit}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              {getTrendIcon(
+                  convertTemp(predictedTemp),
+                  convertTemp(historicalData[historicalData.length - 1].minTemp)
+              )}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+      <span className="px-3 py-1 text-xs rounded-full bg-red-200 text-red-800 font-bold">
+        Predicted
+      </span>
+            </td>
+          </tr>
+          {[...historicalData].reverse().map((data, index, reversedData) => {
+            const temp = convertTemp(data.minTemp);
+            const prevTemp =
+                index > 0
+                    ? convertTemp(reversedData[index - 1].minTemp)
+                    : temp;
+
+            return (
                 <tr key={data.date} className="hover:bg-blue-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {formatDate(data.date)}
@@ -78,32 +100,13 @@ export function DataTable({ historicalData, predictedTemp, unit, convertTemp }: 
                     {index > 0 && getTrendIcon(temp, prevTemp)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
-                      Historical
-                    </span>
+          <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
+            Historical
+          </span>
                   </td>
                 </tr>
-              );
-            })}
-            <tr className="bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 transition-colors">
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                {getTomorrowDate()}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-red-600">
-                {convertTemp(predictedTemp).toFixed(1)}°{unit}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {getTrendIcon(
-                  convertTemp(predictedTemp),
-                  convertTemp(historicalData[historicalData.length - 1].minTemp)
-                )}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-3 py-1 text-xs rounded-full bg-red-200 text-red-800 font-bold">
-                  Predicted
-                </span>
-              </td>
-            </tr>
+            );
+          })}
           </tbody>
         </table>
       </div>

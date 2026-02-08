@@ -38,9 +38,9 @@ export function GoogleAuth({ onAuthChange }: GoogleAuthProps) {
     setTimeout(() => {
       const mockUser: UserProfile = {
         email: 'demo.user@gmail.com',
-        firstName: 'John',
-        lastName: 'Doe',
-        picture: 'https://ui-avatars.com/api/?name=John+Doe&background=3b82f6&color=fff&size=128',
+        firstName: 'Vimukthi',
+        lastName: 'Rajapaksha',
+        picture: 'https://ui-avatars.com/api/?name=Vimukthi+Rajapaksha&background=3b82f6&color=fff&size=128',
       };
       
       setUser(mockUser);

@@ -62,9 +62,6 @@ export function PredictionCard({
             style={{ width: `${confidence}%` }}
           />
         </div>
-        <div className="text-xs text-blue-100 mt-2">
-          Method: {method}
-        </div>
       </div>
     </div>
   );
