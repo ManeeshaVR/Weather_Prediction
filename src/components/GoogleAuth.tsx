@@ -33,8 +33,7 @@ export function GoogleAuth({ onAuthChange }: GoogleAuthProps) {
   const handleGoogleLogin = () => {
     setIsLoading(true);
     
-    // Simulate Google OAuth flow with mock data
-    // In production, this would use the real Google OAuth API
+    // Simulate Google OAuth flow with mock data (for future improvements)
     setTimeout(() => {
       const mockUser: UserProfile = {
         email: 'demo.user@gmail.com',
